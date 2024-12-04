@@ -31,7 +31,7 @@ export default function AboutPage() {
           {/* CEO Section */}
           <div className="text-center mb-16 flex flex-col items-center">
             <Image
-              src="/images/CEO.jpg"
+              src="/assets/CEO.jpg"
               alt="CEO"
               width={150}
               height={150}
