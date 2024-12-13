@@ -18,7 +18,7 @@ export default function ContactUs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/contact', {  // Use relative API path
+      const response = await fetch('/api/contact', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen bg-black text-white font-sans relative overflow-hidden">
       <BackgroundAnimation />
-      <div className="flex flex-col items-center justify-center h-screen z-20">
+      <div className="flex flex-col items-center justify-center px-4 h-screen z-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,14 +50,14 @@ export default function ContactUs() {
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 drop-shadow-lg mb-4 leading-tight pb-2">
             Contact Us
           </h1>
-          <p className="mt-6 text-lg sm:text-xl font-bold lg:text-2xl max-w-xl mx-auto text-gray-300 tracking-wide leading-relaxed">
+          <p className="mt-6 text-base sm:text-lg lg:text-xl font-bold max-w-xl mx-auto text-gray-300 tracking-wide leading-relaxed">
             We're here to help and answer any questions you might have!
           </p>
         </motion.div>
 
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md mt-8 space-y-4 z-30"
+          className="w-full max-w-sm sm:max-w-md mt-8 space-y-4 z-30"
         >
           <input
             type="text"
@@ -108,7 +108,7 @@ function BackgroundAnimation() {
       transition={{ duration: 1 }}
     >
       <motion.div
-        className="absolute w-96 h-96 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70"
+        className="absolute w-72 sm:w-80 md:w-96 h-72 sm:h-80 md:h-96 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70"
         animate={{
           x: [0, 100, -100, 0],
           y: [0, -100, 100, 0],
@@ -123,7 +123,7 @@ function BackgroundAnimation() {
         }}
       />
       <motion.div
-        className="absolute w-72 h-72 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full opacity-70"
+        className="absolute w-56 sm:w-64 md:w-72 h-56 sm:h-64 md:h-72 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full opacity-70"
         animate={{
           x: [100, -100, 100],
           y: [100, -100, 100],
