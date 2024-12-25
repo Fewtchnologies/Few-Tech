@@ -1,51 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
-const MotionDiv = motion.create("div");
+const MotionDiv = motion.div;
 
 export default function ApplyInternship() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    resumeLink: "",
-    coverLetter: "",
-  });
-  const [message, setMessage] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/internship`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setMessage("Application submitted successfully.");
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          resumeLink: "",
-          coverLetter: "",
-        });
-      } else {
-        setMessage("Failed to submit application. Please try again later.");
-      }
-    } catch (error) {
-      setMessage("An error occurred. Please try again later.");
-    }
-  };
+  const [state, handleSubmit] = useForm("mlddryvk");
 
   return (
     <div className="min-h-screen bg-black text-white font-sans relative overflow-hidden">
@@ -70,58 +30,76 @@ export default function ApplyInternship() {
           className="w-full max-w-md mt-8 space-y-4 relative"
         >
           <input
+            id="name"
             type="text"
             name="name"
             placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
             required
             className="w-full p-3 rounded-md text-black"
           />
+          <ValidationError prefix="Name" field="name" errors={state.errors} />
+
           <input
+            id="email"
             type="email"
             name="email"
             placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
             required
             className="w-full p-3 rounded-md text-black"
           />
+          <ValidationError prefix="Email" field="email" errors={state.errors} />
+
           <input
+            id="phone"
             type="tel"
             name="phone"
             placeholder="Your Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
             required
             className="w-full p-3 rounded-md text-black"
           />
+          <ValidationError prefix="Phone" field="phone" errors={state.errors} />
+
           <input
+            id="resumeLink"
             type="url"
             name="resumeLink"
             placeholder="Link to Your Resume"
-            value={formData.resumeLink}
-            onChange={handleChange}
             required
             className="w-full p-3 rounded-md text-black"
           />
+          <ValidationError
+            prefix="Resume Link"
+            field="resumeLink"
+            errors={state.errors}
+          />
+
           <textarea
+            id="coverLetter"
             name="coverLetter"
             placeholder="Your Cover Letter"
-            value={formData.coverLetter}
-            onChange={handleChange}
             required
             className="w-full p-3 rounded-md text-black"
           />
+          <ValidationError
+            prefix="Cover Letter"
+            field="coverLetter"
+            errors={state.errors}
+          />
+
           <button
             type="submit"
+            disabled={state.submitting}
             className="w-full p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md font-semibold"
           >
             Submit Application
           </button>
         </form>
 
-        {message && <p className="mt-4 text-green-500">{message}</p>}
+        {state.succeeded && (
+          <p className="mt-4 text-green-500">
+            Thank you for applying! We'll get back to you soon.
+          </p>
+        )}
       </div>
     </div>
   );
@@ -134,7 +112,7 @@ function BackgroundAnimation() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 0.5 }}
       transition={{ duration: 1 }}
-      style={{ zIndex: -1, pointerEvents: "none" }} // Adjust z-index and pointer-events
+      style={{ zIndex: -1, pointerEvents: "none" }}
     >
       <MotionDiv
         className="absolute w-96 h-96 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-70"
