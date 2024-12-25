@@ -1,41 +1,10 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
-export default function ContactUs() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [message, setMessage] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('/api/contact', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setMessage("Your message has been sent successfully.");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setMessage("Failed to send message. Please try again later.");
-      }
-    } catch (error) {
-      setMessage("An error occurred. Please try again later.");
-    }
-  };
+export default function ContactForm() {
+  const [state, handleSubmit] = useForm("mqaazvwv");
 
   return (
     <div className="min-h-screen bg-black text-white font-sans relative overflow-hidden">
@@ -55,45 +24,47 @@ export default function ContactUs() {
           </p>
         </motion.div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-sm sm:max-w-md mt-8 space-y-4 z-30"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded-md text-white bg-gray-800 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded-md text-white bg-gray-800 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded-md text-white bg-gray-800 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-          <button
-            type="submit"
-            className="w-full p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500"
+        {state.succeeded ? (
+          <p className="text-green-500 mt-6">Thanks for joining!</p>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-sm sm:max-w-md mt-8 space-y-4 z-30"
           >
-            Send Message
-          </button>
-        </form>
-
-        {message && <p className="mt-4 text-green-500">{message}</p>}
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your Email"
+              required
+              className="w-full p-3 rounded-md text-white bg-gray-800 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <ValidationError
+              prefix="Email"
+              field="email"
+              errors={state.errors}
+            />
+            <textarea
+              name="message"
+              id="message"
+              placeholder="Your Message"
+              required
+              className="w-full p-3 rounded-md text-white bg-gray-800 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <ValidationError
+              prefix="Message"
+              field="message"
+              errors={state.errors}
+            />
+            <button
+              type="submit"
+              disabled={state.submitting}
+              className="w-full p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              Send Message
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
