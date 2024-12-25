@@ -10,20 +10,6 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const projects = [
   {
-    id: 1,
-    title: "Tessaract (Blockchain-based Supply Chain Tracker)",
-    description: "A decentralized application (dApp) for tracking products through the supply chain, ensuring transparency and authenticity.",
-    imageUrl: "assets/projects/supplychain/img1.png",
-    // github: "https://github.com/withrajatsharma/supply-chain",
-  },
-  {
-    id: 2,
-    title: "Coding Platform",
-    description: "An educational coding platform, you can play with code in playground or compete with others in coding challenges.",
-    imageUrl: "assets/projects/codingplatform/img1.png",
-    // github: "https://github.com/Pheonixrog/Coding-Platform",
-  },
-  {
     id: 3,
     title: "Powermate: Control your Screen Time with Friends",
     description: "Stay focused and connected — because doom scrolling at 2 AM isn't the vibe.",
@@ -50,6 +36,20 @@ const projects = [
     description: "Connecting talented editors and designers with clients worldwide since 2021.",
     imageUrl: "assets/projects/affordableagency.png",
     github: "https://affordable-agency.vercel.app/",
+  },
+  {
+    id: 1,
+    title: "Tessaract (Blockchain-based Supply Chain Tracker)",
+    description: "A decentralized application (dApp) for tracking products through the supply chain, ensuring transparency and authenticity.",
+    imageUrl: "assets/projects/supplychain/img1.png",
+    // github: "https://github.com/withrajatsharma/supply-chain",
+  },
+  {
+    id: 2,
+    title: "Coding Platform",
+    description: "An educational coding platform, you can play with code in playground or compete with others in coding challenges.",
+    imageUrl: "assets/projects/codingplatform/img1.png",
+    // github: "https://github.com/Pheonixrog/Coding-Platform",
   },
 ];
 
