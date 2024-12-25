@@ -23,13 +23,34 @@ const projects = [
     imageUrl: "assets/projects/codingplatform/img1.png",
     // github: "https://github.com/Pheonixrog/Coding-Platform",
   },
-  // {
-  //   id: 3,
-  //   title: "Portfolio",
-  //   description: "A next.js portfolio website which showcases my skills and projects.",
-  //   imageUrl: "assets/projects/portfolio/img1.png",
-  //   github: "https://github.com/Pradyuman554/Portfolio",
-  // }
+  {
+    id: 3,
+    title: "Powermate: Control your Screen Time with Friends",
+    description: "Stay focused and connected — because doom scrolling at 2 AM isn't the vibe.",
+    imageUrl: "assets/projects/powermate.png",
+    github: "https://powermate-v1--ruddy.vercel.app/",
+  },
+  {
+    id: 4,
+    title: "Powermate v2: Better and more robust",
+    description: "Enhanced focus app with personalized timers, progress tracking, and smart reminders to help you conquer distractions and stop doomscrolling.",
+    imageUrl: "assets/projects/powermatev2.png",
+    github: "https://powermate-hazel.vercel.app/",
+  },
+  {
+    id: 5,
+    title: "Youth India: Your digital newspaper",
+    description: "Stay informed with our online news platform, delivering breaking news, in-depth analysis, and diverse stories from around the globe.",
+    imageUrl: "assets/projects/youthindia.png",
+    github: "https://news-paper-ochre.vercel.app/home",
+  },
+  {
+    id: 6,
+    title: "Affordable agency",
+    description: "Connecting talented editors and designers with clients worldwide since 2021.",
+    imageUrl: "assets/projects/affordableagency.png",
+    github: "https://affordable-agency.vercel.app/",
+  },
 ];
 
 // Define the interface at the top of the file
